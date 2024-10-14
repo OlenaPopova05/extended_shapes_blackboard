@@ -1,0 +1,3 @@
+/Users/olenapopova/Documents/GitHub/extended-shapes-blackboard/cmake-build-debug/CMakeFiles/extended_shapes_blackboard.dir
+/Users/olenapopova/Documents/GitHub/extended-shapes-blackboard/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/olenapopova/Documents/GitHub/extended-shapes-blackboard/cmake-build-debug/CMakeFiles/rebuild_cache.dir
