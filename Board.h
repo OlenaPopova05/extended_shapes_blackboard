@@ -12,8 +12,6 @@ private:
 public:
     Board();
 
-    bool isDuplicateFigure(const Figure& newFigure) const;
-
     void addFigure(std::unique_ptr<Figure> figure);
 
     void addFigureFromFile(int id, std::unique_ptr<Figure> figure);

@@ -1,6 +1,7 @@
 #include "iostream"
 #include "Board.h"
 #include "Figure.h"
+#include "sstream"
 
 Board::Board() : figureID(0), grid(BOARD_HEIGHT, std::vector<char>(BOARD_WIDTH, '~')) {}
 
@@ -34,7 +35,15 @@ void Board::clearBoard() {
 void Board::drawBoard() const {
     std::vector<std::vector<char>> board = grid;
     for (const auto& figure : figures) {
-        figure.second->draw(board);
+        std::istringstream iss(figure.second->getParameters());
+        std::string type;
+        iss >> type;
+
+        if (type == "fill") {
+            figure.second->drawFilled(board);
+        } else if (type == "frame") {
+            figure.second->draw(board);
+        }
     }
     for (const auto& row : board) {
         for (char c : row) {
