@@ -86,16 +86,16 @@ int main() {
             std::string filename = parameters[0];
             FileHandler fileHandler;
             fileHandler.save(board, filename);
-        } //else if (command == "load") {
-        //     if (parameters.size() < 1) {
-        //         std::cout << "Invalid parameters" << std::endl;
-        //         continue;
-        //     }
-        //     std::string filename = parameters[0];
-        //     FileHandler fileHandler;
-        //     fileHandler.load(board, filename);
-        // else {
-        //     std::cout << "Invalid command" << std::endl;
-        // }
+        } else if (command == "load") {
+            if (parameters.size() < 1) {
+                std::cout << "Invalid parameters" << std::endl;
+                continue;
+            }
+            std::string filename = parameters[0];
+            FileHandler fileHandler;
+            fileHandler.load(board, filename);
+        } else {
+             std::cout << "Invalid command" << std::endl;
+        }
     }
 }

@@ -32,3 +32,5 @@ cmake-build-debug/Testing/Temporary/LastTest.log
 .idea/misc.xml
 .idea/extended_shapes_blackboard.iml
 .idea/editor.xml
+cmake-build-debug/figures.txt
+.DS_Store
