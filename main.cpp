@@ -116,6 +116,12 @@ int main() {
             } else {
                 std::cout << "Invalid parameters" << std::endl;
             }
+        } else if (command == "remove") {
+            if (parameters.size() > 0) {
+                std::cout << "Invalid parameters" << std::endl;
+                continue;
+            }
+            board.removeSelectedFigure();
         }else {
              std::cout << "Invalid command" << std::endl;
         }

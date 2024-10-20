@@ -9,6 +9,7 @@ private:
     int figureID;
     std::vector<std::pair<int, std::unique_ptr<Figure>>> figures;
     std::vector<std::vector<std::pair<char, Figure*>>> grid;
+    Figure* selectedFigure = nullptr;
 public:
     Board();
 
@@ -30,9 +31,11 @@ public:
 
     void updateGrid();
 
-    Figure* selectByCoordinates(int x, int y) const;
+    Figure* selectByCoordinates(int x, int y);
 
-    bool checkCoordinates(int x, int y) const;
+    bool checkCoordinates(int x, int y);
 
-    Figure* selectByID(int id) const;
+    Figure* selectByID(int id);
+
+    void removeSelectedFigure();
 };

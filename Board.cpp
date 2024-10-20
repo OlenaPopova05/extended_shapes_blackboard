@@ -76,22 +76,43 @@ void Board::updateGrid() {
     }
 }
 
-Figure* Board::selectByCoordinates(int x, int y) const {
+Figure* Board::selectByCoordinates(int x, int y) {
     if (checkCoordinates(x, y)) {
-        return grid[y][x].second;
+        selectedFigure = grid[y][x].second;
+        return selectedFigure;
     }
     return nullptr;
 }
 
-bool Board::checkCoordinates(int x, int y) const {
+bool Board::checkCoordinates(int x, int y) {
     return (x >= 0 && x < BOARD_WIDTH && y >= 0 && y < BOARD_HEIGHT);
 }
 
-Figure* Board::selectByID(int id) const {
+Figure* Board::selectByID(int id) {
     for (const auto& [figureID, figure] : figures) {
         if (figureID == id) {
-            return figure.get();
+            selectedFigure = figure.get();
+            return selectedFigure;
         }
     }
     return nullptr;
 }
+
+void Board::removeSelectedFigure() {
+    if (!selectedFigure) {
+        std::cout << "No figure selected to remove" << std::endl;
+        return;
+    }
+    for (int i = 0; i < figures.size(); ++i) {
+        if (figures[i].second.get() == selectedFigure) {
+            std::string type = selectedFigure->getType();
+            std::string parameters = selectedFigure->getParameters();
+            figures.erase(figures.begin() + i);
+            std::cout << "< " << type << parameters << " removed" << std::endl;
+            selectedFigure = nullptr;
+            updateGrid();
+            return;
+        }
+    }
+}
+
