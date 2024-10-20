@@ -32,6 +32,14 @@ std::string Circle::getParameters() const {
     return " " + filledOrFrame + " " + color + " " + std::to_string(x) + " " + std::to_string(y) + " " + std::to_string(radius);
 }
 
+void Circle::setParameters(const std::vector<std::string>& parameters) {
+    filledOrFrame = parameters[0];
+    color = parameters[1];
+    x = std::stoi(parameters[2]);
+    y = std::stoi(parameters[3]);
+    radius = std::stoi(parameters[4]);
+}
+
 std::string Circle::getType() const {
     return "circle";
 }
@@ -81,6 +89,14 @@ std::string Triangle::getParameters() const {
     return " " + filledOrFrame + " " + color + " " + std::to_string(x) + " " + std::to_string(y) + " " + std::to_string(height);
 }
 
+void Triangle::setParameters(const std::vector<std::string>& parameters) {
+    filledOrFrame = parameters[0];
+    color = parameters[1];
+    x = std::stoi(parameters[2]);
+    y = std::stoi(parameters[3]);
+    height = std::stoi(parameters[4]);
+}
+
 std::string Triangle::getType() const {
     return "triangle";
 }
@@ -120,6 +136,15 @@ std::string Rectangle::getParameters() const {
     return " " + filledOrFrame + " " + color + " " + std::to_string(x) + " " + std::to_string(y) + " " + std::to_string(width) + " " + std::to_string(height);
 }
 
+void Rectangle::setParameters(const std::vector<std::string>& parameters) {
+    filledOrFrame = parameters[0];
+    color = parameters[1];
+    x = std::stoi(parameters[2]);
+    y = std::stoi(parameters[3]);
+    width = std::stoi(parameters[4]);
+    height = std::stoi(parameters[5]);
+}
+
 std::string Rectangle::getType() const {
     return "rectangle";
 }
@@ -153,6 +178,15 @@ bool Line::checkDimensions(int boardWidth, int boardHeight) const {
 
 std::string Line::getParameters() const {
     return " " + filledOrFrame + " " + color + " " + std::to_string(x1) + " " + std::to_string(y1) + " " + std::to_string(x2) + " " + std::to_string(y2);
+}
+
+void Line::setParameters(const std::vector<std::string>& parameters) {
+    filledOrFrame = parameters[0];
+    color = parameters[1];
+    x1 = std::stoi(parameters[2]);
+    y1 = std::stoi(parameters[3]);
+    x2 = std::stoi(parameters[4]);
+    y2 = std::stoi(parameters[5]);
 }
 
 std::string Line::getType() const {

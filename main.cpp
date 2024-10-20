@@ -122,6 +122,8 @@ int main() {
                 continue;
             }
             board.removeSelectedFigure();
+        } else if (command == "edit"){
+            board.editSelectedFigure(parameters);
         }else {
              std::cout << "Invalid command" << std::endl;
         }

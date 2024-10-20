@@ -116,3 +116,15 @@ void Board::removeSelectedFigure() {
     }
 }
 
+void Board::editSelectedFigure(const std::vector<std::string>& parameters) {
+    if (!selectedFigure) {
+        std::cout << "No figure selected to edit" << std::endl;
+        return;
+    }
+    if (parameters.size() < selectedFigure->getParametersCount()) {
+        std::cout << "Invalid parameters count" << std::endl;
+        return;
+    }
+    selectedFigure->setParameters(parameters);
+    updateGrid();
+}

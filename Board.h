@@ -38,4 +38,6 @@ public:
     Figure* selectByID(int id);
 
     void removeSelectedFigure();
+
+    void editSelectedFigure(const std::vector<std::string>& parameters);
 };

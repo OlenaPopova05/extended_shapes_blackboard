@@ -22,6 +22,10 @@ public:
 
     virtual std::string getParameters() const = 0;
 
+    virtual void setParameters(const std::vector<std::string>& parameters) = 0;
+
+    virtual int getParametersCount() const = 0;
+
     virtual std::string getType() const = 0;
 };
 
@@ -42,6 +46,10 @@ public:
 
     std::string getParameters() const override;
 
+    void setParameters(const std::vector<std::string> &parameters) override;
+
+    int getParametersCount() const override { return 5; }
+
     std::string getType() const override;
 };
 
@@ -60,6 +68,10 @@ public:
     bool checkDimensions(int boardWidth, int boardHeight) const override;
 
     std::string getParameters() const override;
+
+    void setParameters(const std::vector<std::string> &parameters) override;
+
+    int getParametersCount() const override { return 5; }
 
     std::string getType() const override;
 };
@@ -80,6 +92,10 @@ public:
 
     std::string getParameters() const override;
 
+    void setParameters(const std::vector<std::string> &parameters) override;
+
+    int getParametersCount() const override { return 6; }
+
     std::string getType() const override;
 };
 
@@ -98,6 +114,10 @@ public:
     bool checkDimensions(int boardWidth, int boardHeight) const override;
 
     std::string getParameters() const override;
+
+    void setParameters(const std::vector<std::string> &parameters) override;
+
+    int getParametersCount() const override { return 6; }
 
     std::string getType() const override;
 };
