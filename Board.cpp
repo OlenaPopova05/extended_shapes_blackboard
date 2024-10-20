@@ -1,73 +1,52 @@
-#include "iostream"
 #include "Board.h"
-#include "Figure.h"
-#include "sstream"
+#include <iostream>
+#include <sstream>
 
-Board::Board() : figureID(0), grid(BOARD_HEIGHT, std::vector<char>(BOARD_WIDTH, '~')) {}
+Board::Board()
+    : figureID(0),
+      grid(BOARD_HEIGHT, std::vector<std::pair<char, Figure*>>(BOARD_WIDTH, {'~', nullptr})) {}
 
 void Board::addFigure(std::unique_ptr<Figure> figure) {
     if (!figure->checkDimensions(BOARD_WIDTH, BOARD_HEIGHT)) {
         std::cout << "Invalid dimensions" << std::endl;
         return;
     }
-    figures.push_back(std::make_pair(figureID++, std::move(figure)));
+    figures.emplace_back(figureID++, std::move(figure));
+    updateGrid();
 }
 
 void Board::addFigureFromFile(int id, std::unique_ptr<Figure> figure) {
-    figures.push_back(std::make_pair(id, std::move(figure)));
+    figures.emplace_back(id, std::move(figure));
+    updateGrid();
 }
 
 void Board::removeLastFigure() {
     if (!figures.empty()) {
         figures.pop_back();
+        updateGrid();
     }
 }
 
 void Board::clearBoard() {
     figures.clear();
     for (auto& row : grid) {
-        for (char& c : row) {
-            c = '~';
-        }
+        std::fill(row.begin(), row.end(), std::make_pair('~', nullptr));
     }
 }
 
 void Board::drawBoard() const {
-    std::vector<std::vector<char>> board = grid;
-    for (const auto& figure : figures) {
-        std::istringstream iss(figure.second->getParameters());
-        std::string type;
-        iss >> type;
-
-        if (type == "fill") {
-            figure.second->drawFilled(board);
-        } else if (type == "frame") {
-            figure.second->draw(board);
+    for (const auto& row : grid) {
+        for (const auto& cell : row) {
+            std::cout << cell.first;
         }
-    }
-    for (const auto& row : board) {
-        for (char c : row) {
-            std::cout << c;
-        }
-        std::cout << std::endl;
+        std::cout << '\n';
     }
 }
 
 void Board::listFigures() const {
-    for (const auto& figure : figures) {
-        std::string type;
-        if (dynamic_cast<Circle*>(figure.second.get())) {
-            type = "circle";
-        } else if (dynamic_cast<Triangle*>(figure.second.get())) {
-            type = "triangle";
-        } else if (dynamic_cast<Rectangle*>(figure.second.get())) {
-            type = "rectangle";
-        } else if (dynamic_cast<Line*>(figure.second.get())) {
-            type = "line";
-        } else {
-            type = "unknown";
-        }
-        std::cout << figure.first << " " << type << figure.second->getParameters() << std::endl;
+    for (const auto& [id, figure] : figures) {
+        std::cout << id << " " << figure->getType()
+                  << " " << figure->getParameters() << std::endl;
     }
 }
 
@@ -76,20 +55,23 @@ std::vector<std::pair<int, std::unique_ptr<Figure>>>& Board::getBoard() {
 }
 
 std::string Board::getType(int figureID) const {
-    for (const auto& figure : figures) {
-        if (figure.first == figureID) {
-            if (dynamic_cast<Circle*>(figure.second.get())) {
-                return "circle";
-            } else if (dynamic_cast<Triangle*>(figure.second.get())) {
-                return "triangle";
-            } else if (dynamic_cast<Rectangle*>(figure.second.get())) {
-                return "rectangle";
-            } else if (dynamic_cast<Line*>(figure.second.get())) {
-                return "line";
-            } else {
-                return "unknown";
-            }
+    for (const auto& [id, figure] : figures) {
+        if (id == figureID) {
+            return figure->getType();
         }
     }
     return "unknown";
+}
+
+void Board::updateGrid() {
+    for (auto& row : grid) {
+        std::fill(row.begin(), row.end(), std::make_pair('~', nullptr));
+    }
+    for (const auto& [id, figure] : figures) {
+        if (figure->getFillType() == "fill") {
+            figure->drawFilled(grid);
+        } else {
+            figure->draw(grid);
+        }
+    }
 }

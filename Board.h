@@ -8,7 +8,7 @@ private:
     static constexpr int BOARD_HEIGHT = 25;
     int figureID;
     std::vector<std::pair<int, std::unique_ptr<Figure>>> figures;
-    std::vector<std::vector<char>> grid;
+    std::vector<std::vector<std::pair<char, Figure*>>> grid;
 public:
     Board();
 
@@ -27,4 +27,6 @@ public:
     std::vector<std::pair<int, std::unique_ptr<Figure>>>& getBoard();
 
     std::string getType(int figureID) const;
+
+    void updateGrid();
 };
