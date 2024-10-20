@@ -94,7 +94,29 @@ int main() {
             std::string filename = parameters[0];
             FileHandler fileHandler;
             fileHandler.load(board, filename);
-        } else {
+        }
+        else if (command == "select") {
+            if (parameters.size() < 1) {
+                std::cout << "Invalid parameters" << std::endl;
+                continue;
+            }
+            if (parameters.size() == 1) {
+                int id = std::stoi(parameters[0]);
+                Figure* figure = board.selectByID(id);
+                if (figure != nullptr) {
+                    std::cout << "< " << figure->getType() << figure->getParameters() << std::endl;
+                }
+            } else if (parameters.size() == 2) {
+                int x = std::stoi(parameters[0]);
+                int y = std::stoi(parameters[1]);
+                Figure* figure = board.selectByCoordinates(x, y);
+                if (figure != nullptr) {
+                    std::cout << "< " << figure->getType() << figure->getParameters() << std::endl;
+                }
+            } else {
+                std::cout << "Invalid parameters" << std::endl;
+            }
+        }else {
              std::cout << "Invalid command" << std::endl;
         }
     }

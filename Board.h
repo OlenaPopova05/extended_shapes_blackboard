@@ -29,4 +29,10 @@ public:
     std::string getType(int figureID) const;
 
     void updateGrid();
+
+    Figure* selectByCoordinates(int x, int y) const;
+
+    bool checkCoordinates(int x, int y) const;
+
+    Figure* selectByID(int id) const;
 };

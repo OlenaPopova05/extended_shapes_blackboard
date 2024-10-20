@@ -75,3 +75,23 @@ void Board::updateGrid() {
         }
     }
 }
+
+Figure* Board::selectByCoordinates(int x, int y) const {
+    if (checkCoordinates(x, y)) {
+        return grid[y][x].second;
+    }
+    return nullptr;
+}
+
+bool Board::checkCoordinates(int x, int y) const {
+    return (x >= 0 && x < BOARD_WIDTH && y >= 0 && y < BOARD_HEIGHT);
+}
+
+Figure* Board::selectByID(int id) const {
+    for (const auto& [figureID, figure] : figures) {
+        if (figureID == id) {
+            return figure.get();
+        }
+    }
+    return nullptr;
+}
