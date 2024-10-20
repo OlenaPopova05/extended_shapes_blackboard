@@ -40,4 +40,6 @@ public:
     void removeSelectedFigure();
 
     void editSelectedFigure(const std::vector<std::string>& parameters);
+
+    void paintSelectedFigure(const std::string& color);
 };

@@ -122,8 +122,15 @@ int main() {
                 continue;
             }
             board.removeSelectedFigure();
-        } else if (command == "edit"){
+        } else if (command == "edit") {
             board.editSelectedFigure(parameters);
+        } else if (command == "paint") {
+            if (parameters.size() < 1) {
+                std::cout << "Invalid parameters" << std::endl;
+                continue;
+            }
+            std::string color = parameters[0];
+            board.paintSelectedFigure(color);
         }else {
              std::cout << "Invalid command" << std::endl;
         }

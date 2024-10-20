@@ -128,3 +128,12 @@ void Board::editSelectedFigure(const std::vector<std::string>& parameters) {
     selectedFigure->setParameters(parameters);
     updateGrid();
 }
+
+void Board::paintSelectedFigure(const std::string& color) {
+    if (!selectedFigure) {
+        std::cout << "No figure selected to paint" << std::endl;
+        return;
+    }
+    selectedFigure->setColor(color);
+    updateGrid();
+}

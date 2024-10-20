@@ -27,6 +27,8 @@ public:
     virtual int getParametersCount() const = 0;
 
     virtual std::string getType() const = 0;
+
+    void setColor(const std::string& newColor) { color = newColor; }
 };
 
 
