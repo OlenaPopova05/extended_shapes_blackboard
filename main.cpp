@@ -131,6 +131,14 @@ int main() {
             }
             std::string color = parameters[0];
             board.paintSelectedFigure(color);
+        } else if (command == "move") {
+            if (parameters.size() < 2) {
+                std::cout << "Invalid parameters" << std::endl;
+                continue;
+            }
+            int x = std::stoi(parameters[0]);
+            int y = std::stoi(parameters[1]);
+            board.moveSelectedFigure(x, y);
         }else {
              std::cout << "Invalid command" << std::endl;
         }

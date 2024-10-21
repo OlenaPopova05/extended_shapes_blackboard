@@ -137,3 +137,34 @@ void Board::paintSelectedFigure(const std::string& color) {
     selectedFigure->setColor(color);
     updateGrid();
 }
+
+void Board::moveSelectedFigure(int x, int y) {
+    if (!selectedFigure) {
+        std::cout << "No figure selected to move" << std::endl;
+        return;
+    }
+    if (!checkCoordinates(x, y)) {
+        std::cout << "Invalid coordinates" << std::endl;
+        return;
+    }
+    int selectedIndex = -1;
+    for (int i = 0; i < figures.size(); ++i) {
+        if (figures[i].second.get() == selectedFigure) {
+            selectedIndex = i;
+            break;
+        }
+    }
+    if (selectedIndex != -1) {
+        int selectedID = figures[selectedIndex].first;
+        std::unique_ptr<Figure> movedFigure = std::move(figures[selectedIndex].second);
+        figures.erase(figures.begin() + selectedIndex);
+        movedFigure->setNewCoordinates(x, y);
+        figures.emplace_back(selectedID, std::move(movedFigure));
+        std::cout << "< " << figures.back().second->getType() << figures.back().second->getParameters() << " moved" << std::endl;
+    } else {
+        std::cout << "Selected figure not found in the list" << std::endl;
+    }
+    selectedFigure = nullptr;
+    updateGrid();
+}
+

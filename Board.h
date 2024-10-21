@@ -42,4 +42,6 @@ public:
     void editSelectedFigure(const std::vector<std::string>& parameters);
 
     void paintSelectedFigure(const std::string& color);
+
+    void moveSelectedFigure(int x, int y);
 };

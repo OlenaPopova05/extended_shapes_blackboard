@@ -29,6 +29,8 @@ public:
     virtual std::string getType() const = 0;
 
     void setColor(const std::string& newColor) { color = newColor; }
+
+    virtual void setNewCoordinates(int x, int y) = 0;
 };
 
 
@@ -53,6 +55,8 @@ public:
     int getParametersCount() const override { return 5; }
 
     std::string getType() const override;
+
+    void setNewCoordinates(int x, int y) override { this->x = x; this->y = y; }
 };
 
 class Triangle : public Figure {
@@ -76,6 +80,8 @@ public:
     int getParametersCount() const override { return 5; }
 
     std::string getType() const override;
+
+    void setNewCoordinates(int x, int y) override { this->x = x; this->y = y; }
 };
 
 class Rectangle : public Figure {
@@ -99,6 +105,8 @@ public:
     int getParametersCount() const override { return 6; }
 
     std::string getType() const override;
+
+    void setNewCoordinates(int x, int y) override { this->x = x; this->y = y; }
 };
 
 class Line : public Figure {
@@ -122,4 +130,6 @@ public:
     int getParametersCount() const override { return 6; }
 
     std::string getType() const override;
+
+    void setNewCoordinates(int x, int y) override { x1 = x; y1 = y; }
 };
