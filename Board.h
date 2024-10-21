@@ -15,6 +15,8 @@ public:
 
     void addFigure(std::unique_ptr<Figure> figure);
 
+    bool isDuplicate(const Figure& newFigure) const;
+
     void addFigureFromFile(int id, std::unique_ptr<Figure> figure);
 
     void removeLastFigure();

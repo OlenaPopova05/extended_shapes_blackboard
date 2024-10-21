@@ -11,8 +11,21 @@ void Board::addFigure(std::unique_ptr<Figure> figure) {
         std::cout << "Invalid dimensions" << std::endl;
         return;
     }
+    if (isDuplicate(*figure)) {
+        std::cout << "Figure already exists" << std::endl;
+        return;
+    }
     figures.emplace_back(figureID++, std::move(figure));
     updateGrid();
+}
+
+bool Board::isDuplicate(const Figure& newFigure) const {
+    for (const auto& [id, figure] : figures) {
+        if (figure->getType() == newFigure.getType() && figure->getParameters() == newFigure.getParameters()) {
+            return true;
+        }
+    }
+    return false;
 }
 
 void Board::addFigureFromFile(int id, std::unique_ptr<Figure> figure) {
