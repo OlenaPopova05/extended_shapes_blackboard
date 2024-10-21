@@ -1,6 +1,23 @@
 #include "iostream"
 #include "Figure.h"
 
+std::string Figure::getANSIColorCode() const {
+    static const std::unordered_map<std::string, std::string> colorMap = {
+        {"red", "\033[0;31m"},
+        {"blue", "\033[0;34m"},
+        {"green", "\033[0;32m"},
+        {"yellow", "\033[0;33m"},
+        {"orange", "\033[0;33m"},
+        {"purple", "\033[0;35m"},
+        {"white", "\033[0;37m"},
+    };
+    auto it = colorMap.find(color);
+    if (it != colorMap.end()) {
+        return it->second;
+    }
+    return "\033[0;0m";
+}
+
 void Circle::draw(std::vector<std::vector<std::pair<char, Figure*>>>& grid) {
     for (int i = 0; i < grid.size(); i++) {
         for (int j = 0; j < grid[i].size(); j++) {

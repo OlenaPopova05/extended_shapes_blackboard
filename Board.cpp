@@ -50,9 +50,13 @@ void Board::clearBoard() {
 void Board::drawBoard() const {
     for (const auto& row : grid) {
         for (const auto& cell : row) {
-            std::cout << cell.first;
+            if (cell.second) {
+                std::cout << cell.second->getANSIColorCode() << cell.first << "\033[0m";
+            } else {
+                std::cout << cell.first;
+            }
         }
-        std::cout << '\n';
+        std::cout << std::endl;
     }
 }
 

@@ -12,6 +12,8 @@ public:
 
     virtual ~Figure() = default;
 
+    std::string getANSIColorCode() const;
+
     const std::string& getFillType() const { return filledOrFrame; }
 
     virtual void draw(std::vector<std::vector<std::pair<char, Figure*>>>& grid) = 0;
